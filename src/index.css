@@ -68,3 +68,16 @@ code {
 }
 
 
+
+.form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.form h1{
+  font-size: 2rem;
+  font-weight: bolder;
+}

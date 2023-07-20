@@ -130,6 +130,7 @@ const Header = () => {
           py={4}
           justifyContent="space-between"
           alignItems="center"
+          flexWrap="wrap" 
         >
           <nav>
             {/* Add social media links based on the `socials` data */}

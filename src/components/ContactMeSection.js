@@ -1,5 +1,5 @@
-import React, {useEffect,useRef,useState} from "react";
-import { useFormik, validateYupSchema,useFormikContext } from "formik";
+import React, { useEffect, useRef, useState } from "react";
+import { useFormik, validateYupSchema, useFormikContext } from "formik";
 import {
   Box,
   Button,
@@ -16,7 +16,7 @@ import {
 import * as Yup from 'yup';
 import FullScreenSection from "./FullScreenSection";
 import useSubmit from "../hooks/useSubmit";
-import {useAlertContext} from "../context/alertContext";
+import { useAlertContext } from "../context/alertContext";
 import * as yup from 'yup';
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Field, Form, Formik } from 'formik';
@@ -29,15 +29,15 @@ const LandingSection = () => {
 
 
   const {
-      isLoading,
-      response,
-      submit
-    } = useSubmit();
+    isLoading,
+    response,
+    submit
+  } = useSubmit();
   const {
-     isOpen, 
-     onClose, 
-     onOpen,
-    } = useAlertContext();
+    isOpen,
+    onClose,
+    onOpen,
+  } = useAlertContext();
 
 
   const formik = useFormik({
@@ -48,22 +48,22 @@ const LandingSection = () => {
       comment: '',
     },
     onSubmit: (values) => {
-    submit('url',values)
-    onOpen(response.type,response.message)
-    if(response.type ==="success"){
-      formik.resetForm();
-    }
-  
-  
+      submit('url', values)
+      onOpen(response.type, response.message)
+      if (response.type === "success") {
+        formik.resetForm();
+      }
+
+
     },
     validationSchema: Yup.object().shape({
-      firstName: yup.string("This is not string").min(5,"minimum 5 character" ).required("This field is required"),
+      firstName: yup.string("This is not string").min(5, "minimum 5 character").required("This field is required"),
       email: yup.string().email("Please enter a valid email address").required("This field is required"),
-      type:'',
-      comment: yup.string().min(25,"minimum 25 character" ).required("This field is required"),
+      type: '',
+      comment: yup.string().min(25, "minimum 25 character").required("This field is required"),
     }),
   });
-  
+
 
   return (
     <FullScreenSection
@@ -71,20 +71,18 @@ const LandingSection = () => {
       backgroundColor="#512DA8"
       py={16}
       spacing={8}
+      flexWrap="wrap"
     >
-      <VStack w="1024px" p={32} alignItems="flex-start">
-        <Heading as="h1" id="contactme-section">
-          Contact me
-        </Heading>
-        <Box p={6} rounded="md" w="100%">
-          
-          <form onSubmit={formik.handleSubmit}>
+      <VStack w="1024px" p={32} alignItems="flex-start" >
+        <Box p={6} rounded="md" w="100%" >
+          <form className="form" onSubmit={formik.handleSubmit} flexWrap="wrap">
+            <h1 id="contactme-section" >Contact me</h1>
             <VStack spacing={4}>
-              <FormControl isInvalid={!!formik.errors.firstName && formik.touched.firstName }>
+              <FormControl isInvalid={!!formik.errors.firstName && formik.touched.firstName}>
                 <FormLabel htmlFor="firstName">Name</FormLabel>
-                <Input 
+                <Input
                   value={formik.values.firstName}
-                  onChange = {formik.handleChange}
+                  onChange={formik.handleChange}
                   id="firstName"
                   name="firstName"
                   type="text"
@@ -114,7 +112,7 @@ const LandingSection = () => {
                   <option value="other">Other</option>
                 </Select>
               </FormControl>
-              <FormControl isInvalid={!!formik.errors.comment && formik.touched.comment }>
+              <FormControl isInvalid={!!formik.errors.comment && formik.touched.comment}>
                 <FormLabel htmlFor="comment">Your message</FormLabel>
                 <Textarea
                   id="comment"
@@ -124,15 +122,15 @@ const LandingSection = () => {
                 />
                 <FormErrorMessage>{formik.errors.comment}</FormErrorMessage>
               </FormControl>
-              <Button 
-              //disabled ={!formik.touched.comment || formik.errors.comment ? true : false}
-              isLoading = {isLoading ? true : false}
-              loadingText="Submitting"
-              type="submit" 
-              colorScheme="purple" 
-              width="full"
+              <Button
+                //disabled ={!formik.touched.comment || formik.errors.comment ? true : false}
+                isLoading={isLoading ? true : false}
+                loadingText="Submitting"
+                type="submit"
+                colorScheme="purple"
+                width="full"
               >
-              Submit  
+                Submit
               </Button>
             </VStack>
           </form>
